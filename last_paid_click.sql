@@ -1,4 +1,3 @@
-/*Запрос создает витрину для модели атрибуции Last Paid Click*/
 WITH sl AS (
     SELECT
         s.visitor_id,
@@ -13,7 +12,7 @@ WITH sl AS (
         l.status_id
     FROM sessions AS s
     LEFT JOIN leads AS l
-        ON s.visitor_id = l.visitor_id
+        ON s.visitor_id = l.visitor_id AND s.visit_date <= l.created_at
     WHERE s.medium != 'organic'
 ),
 rnkd AS (
